@@ -10,6 +10,7 @@ import {
   SORTERS,
 } from './actions';
 
+// configuration for fuzzy searcher; MySportsFeeds' is junk/non-functional
 const fuseConfig = {
   shouldSort: false,
   tokenize: true,
@@ -25,6 +26,7 @@ const fuseConfig = {
   ],
 }
 
+// reducer, essentially traverses over actions, giving them meaning
 const feed = (state = {
   isFetching:      false,
   playerStats:     [],
@@ -82,8 +84,6 @@ const feed = (state = {
   }
 };
 
-const rootReducer = combineReducers({
-  feed,
-});
+const rootReducer = combineReducers({ feed });
 
 export default rootReducer;

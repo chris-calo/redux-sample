@@ -12,7 +12,6 @@ export const SHOW_CONTINUE = 'SHOW_CONTINUE';
 // if bit 0x400 is set, sorts in descending order
 export const SORT_DESC     = 0x400;
 export const SORT_MASK     = 0x3FF;
-
 export const SORTERS       = {
   LAST_NAME:  0x001,
   AGE:        0x002,
@@ -77,6 +76,9 @@ const receiveFeed  = (url, json, descending) => {
   };
 };
 
+// tries its best to load data from mysportsfeeds.com
+// however, non-commercial accounts are extremely limited
+// so, if it can't, we can use saved data
 const fetchFeed  = (filterName = '', sortMethod) => {
   return dispatch => {
     const baseURL  = 'https://api.mysportsfeeds.com/v1.2/pull';
