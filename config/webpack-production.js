@@ -177,10 +177,12 @@ const serverOptimization = {
   ],
 };
 
+/*
 const aliases = {
   'react': 'preact-compat',
   'react-dom': 'preact-compat',
 };
+*/
 
 const commonPlugins = [
   new MiniCssExtractPlugin({
@@ -194,9 +196,9 @@ const browserConfig = {
   entry: './src/browser/index.js',
   // optimization: browserOptimization,
   optimization: { minimizer: [] },
-  resolve: {
-    alias: aliases,
-  },
+  // resolve: {
+    // alias: aliases,
+  // },
   output: {
     path: path.resolve(__dirname, '..', 'build'),
     filename: 'static/scripts/bundle.js',
@@ -226,9 +228,9 @@ const serverConfig = {
   target: 'node',
   // optimization: serverOptimization,
   optimization: { minimizer: [] },
-  resolve: {
-    alias: aliases,
-  },
+  // resolve: {
+    // alias: aliases,
+  // },
   externals: [nodeExternals()],
   output: {
     path: path.resolve(__dirname, '..', 'build'),
