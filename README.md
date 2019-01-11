@@ -9,7 +9,7 @@ player/team name.
 
 ## dev usage
 
-A MySportsFeeds.com API key (subscribed to the NHL league), and account
+A MySportsFeeds.com API key (subscribed to the NHL league) and account
 password are required for this program's usage.
 
 In the example below, starting the program under the test server,
