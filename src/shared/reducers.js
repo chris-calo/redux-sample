@@ -4,6 +4,7 @@ import {
   REQUEST_FEED,
   RECEIVE_FEED,
   FILTER_FEED,
+  FILTER_CLEAR,
   SORT_FEED,
   SHOW_MORE,
   SHOW_CONTINUE,
@@ -12,7 +13,7 @@ import {
 
 // configuration for fuzzy searcher; MySportsFeeds' is junk/non-functional
 const fuseConfig = {
-  shouldSort: false,
+  shouldSort: true,
   tokenize: true,
   threshold: 0.35,
   location: 0,
@@ -59,6 +60,11 @@ const feed = (state = {
       return Object.assign({}, state, {
         filterName: searchTerm,
         filteredStats: results,
+      });
+    case FILTER_CLEAR:
+      return Object.assign({}, state, {
+        filterName: action.filterName,
+        filteredStats: [],
       });
     case SORT_FEED:
       const { sortMethod } = action;

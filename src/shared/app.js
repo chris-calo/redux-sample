@@ -10,6 +10,7 @@ import {
   SORT_DESC,
   fetchFeedIfNeeded,
   filterFeed,
+  filterClear,
   sortFeed,
   showMore,
   showContinue,
@@ -31,8 +32,8 @@ class App extends React.Component {
   componentDidMount() {
     this.mounted = true;
 
-    const { dispatch, filterName, sortMethod } = this.props;
-    dispatch(fetchFeedIfNeeded(filterName, sortMethod));
+    const { dispatch, sortMethod } = this.props;
+    dispatch(fetchFeedIfNeeded(sortMethod));
 
     // ensure we bind to window only when global is present
     // check ensures this will not be run server-side
@@ -50,12 +51,11 @@ class App extends React.Component {
 
   // called when state updates
   componentDidUpdate(prevProps) {
-    const filterDiff = this.props.filterName !== prevProps.filterName;
     const sortDiff   = this.props.sortMethod !== prevProps.sortMethod;
 
-    if (filterDiff || sortDiff) {
-      const { dispatch, filterName, sortMethod } = this.props;
-      dispatch(fetchFeedIfNeeded(filterName, sortMethod));
+    if (sortDiff) {
+      const { dispatch, sortMethod } = this.props;
+      dispatch(fetchFeedIfNeeded(sortMethod));
     }
   }
 
@@ -88,18 +88,24 @@ class App extends React.Component {
   // updates state to match desired sort preferences
   sortBy(method) {
     const { dispatch, sortMethod, filterName } = this.props;
+    if (filterName.length) return;
+
     const tempMethod = sortMethod === method ? method | SORT_DESC : method;
 
     dispatch(sortFeed(tempMethod));
-    dispatch(fetchFeedIfNeeded(filterName, tempMethod));
+    dispatch(fetchFeedIfNeeded(tempMethod));
   }
 
   // updates state to match desired filter term
   filterBy(name) {
     const { dispatch, sortMethod } = this.props;
-
     dispatch(filterFeed(name));
-    dispatch(fetchFeedIfNeeded(name, sortMethod));
+  }
+
+  // removes any existing filters on the data set
+  filterClear() {
+    const { dispatch } = this.props;
+    dispatch(filterClear());
   }
 
   render() {
@@ -127,6 +133,7 @@ class App extends React.Component {
             <Display
             sortBy={method => this.sortBy(method)}
             filterBy={name => this.filterBy(name)}
+            filterClear={() => this.filterClear()}
             continueManually={() => this.continueManually()}
             filterName={filterName}
             sortMethod={sortMethod}

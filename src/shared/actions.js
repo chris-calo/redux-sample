@@ -4,6 +4,7 @@ import fetch from 'isomorphic-fetch';
 export const REQUEST_FEED  = 'REQUEST_FEED';
 export const RECEIVE_FEED  = 'RECEIVE_FEED';
 export const FILTER_FEED   = 'FILTER_FEED';
+export const FILTER_CLEAR  = 'FILTER_CLEAR';
 export const SORT_FEED     = 'SORT_FEED';
 export const SHOW_MORE     = 'SHOW_MORE';
 export const SHOW_CONTINUE = 'SHOW_CONTINUE';
@@ -31,6 +32,13 @@ export const filterFeed   = name => {
   return {
     type: FILTER_FEED,
     filterName: name,
+  };
+};
+
+export const filterClear = () => {
+  return {
+    type: FILTER_CLEAR,
+    filterName: "",
   };
 };
 
@@ -79,7 +87,7 @@ const receiveFeed  = (url, json, descending) => {
 // tries its best to load data from mysportsfeeds.com
 // however, non-commercial accounts are extremely limited
 // so, if it can't, we can use saved data
-const fetchFeed  = (filterName = '', sortMethod) => {
+const fetchFeed  = (sortMethod) => {
   return dispatch => {
     const baseURL  = 'https://api.mysportsfeeds.com/v1.2/pull';
     const path     = '/nhl/2017-2018-regular/cumulative_player_stats.json';
@@ -122,10 +130,9 @@ const fetchFeed  = (filterName = '', sortMethod) => {
     }
 
     let params     = '';
-    if (filterName.length || sortBy.length) {
+    if (sortBy.length) {
       params = '?';
 
-      if (filterName.length) params += `player=${filterName}`;
       if (sortBy.length) params += `sort=${sortBy}`;
     }
 
@@ -166,10 +173,10 @@ const shouldFetchFeed = (state) => {
   return false;
 }
 
-export const fetchFeedIfNeeded = (filterName, sortMethod) => {
+export const fetchFeedIfNeeded = (sortMethod) => {
   return (dispatch, getState) => {
     if (shouldFetchFeed(getState())) {
-      return dispatch(fetchFeed(filterName, sortMethod));
+      return dispatch(fetchFeed(sortMethod));
     }
   };
 };

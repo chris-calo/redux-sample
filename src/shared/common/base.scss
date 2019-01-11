@@ -49,8 +49,6 @@ html, body, .app {
   }
 
   input[type="submit"] {
-    color: transparentize($black, 0.1);
-    background: $yellow;
     width: 100px;
     padding: 10px;
     margin-top: 40px;
@@ -58,6 +56,16 @@ html, body, .app {
     font-weight: 600;
     margin-left: 15px;
     cursor: pointer;
+
+    &[value="Filter"] {
+      color: transparentize($black, 0.1);
+      background: $yellow;
+    }
+
+    &[value="Clear"] {
+      color: transparentize($white, 0.1);
+      background: $error;
+    }
   }
 }
 
@@ -75,6 +83,10 @@ html, body, .app {
       font-size: 12px !important;
       padding-left: 2px;
     }
+  }
+
+  tr.filtered th {
+    cursor: not-allowed !important;
   }
 
   td {
@@ -99,7 +111,7 @@ html, body, .app {
   }
 }
 
-.display button {
+.display table + button {
   color: transparentize($black, 0.1);
   background: $yellow;
   padding: 15px 85px;

@@ -55,13 +55,16 @@ there are a few known oddities, implemented as time-saving measures:
   platform, alongside a subscription to the NHL league.
 - A further caveat of the MSF.com's non-commercial API, which was used to
   build this program, is that it is limited to only a few requests per
-  day. As a result, not only was this program required to be built with a
-  very small window for debugging, but it also affects its usage. As such,
-  if this program was initially intended for your use, you should have
-  received, a JSON file containing a small sampling of NHL data. By
-  playing it in `/src/shared/`, the program will boot and allow for
-  searching. Unfortunately, because sorting is tied to the API, it will
+  day. As such, if this program was specifically built for your use, you
+  should have received, a JSON file containing a small sampling of NHL
+  data. By playing it in `/src/shared/`, the program will boot and allow
+  for searching. Unfortunately, because sorting is tied to the API, it will
   be non-functional using this method.
+- Unfortunately, since MSF.com's filter is fairly limited and a fuzzy
+  search module is used client-side, sorting is temporarily disabled when
+  searching. This is simply due to the way the search algorithm works. In
+  a true, production environment, data would be cached, and likely all
+  sorting and filtering would be done outside of the third-party API.
 - This program is not an example of good user-interface design, merely
   a simple case showing that the API can be communicated with. Please don't
   judge it on its visual merit, I can do FAAAAAAAAR better.

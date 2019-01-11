@@ -25,6 +25,9 @@ class Display extends React.Component {
 
   // generates a sort direction (if applicable)
   sortDirection(target, sortMethod) {
+    const { filterName } = this.props;
+    if (filterName.length) return null;
+
     if (target !== (sortMethod & SORT_MASK)) return null;
     return sortMethod & SORT_DESC ? (
       <span className="sort-direction">&#9650;</span>
@@ -33,13 +36,30 @@ class Display extends React.Component {
     );
   }
 
-  // handles submission of the filter form
+  // handles submission of the filter form (filtering or removing filters)
   filterSubmit(e) {
+    e.preventDefault();
+
+    const { filterBy, filterClear, filterName } = this.props;
+
+    const form = e.target || e.srcElement;
+    const input = form.querySelector('input[name="filter"]');
+
+    if (filterName.length) {
+      input.value = "";
+      filterClear();
+    } else {
+      filterBy(input.value);
+    }
+  }
+
+  // handles clearing of the filters
+  filterClear(e) {
     e.preventDefault();
 
     const form = e.target || e.srcElement;
     const input = form.querySelector('input[name="filter"]');
-    this.props.filterBy(input.value);
+    
   }
 
   render() {
@@ -95,12 +115,20 @@ class Display extends React.Component {
             <input type="text" name="filter"
             placeholder="Search by Player or Team Name"
             defaultValue={filterName.length ? filterName : ""} />
-            <input type="submit" value="Search" />
+
+            {
+              filterName.length ?
+              (
+                <input type="submit" value="Clear" />
+              ) : (
+                <input type="submit" value="Filter" />
+              )
+            }
           </form>
         </div>
         <table>
           <tbody>
-            <tr>
+            <tr className={filterName.length ? "filtered" : ""}>
               <th onClick={() => sortBy(SORTERS.TEAM)}>
                 <span className="label">Team Name</span>
                 {this.sortDirection(SORTERS.TEAM, sortMethod)}
