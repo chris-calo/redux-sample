@@ -1,6 +1,6 @@
-# Contour Sample
+# Redux Sample
 
-Technical sample, requested by Nate Hunter.
+Technical sample, requested by some dude.
 
 This sample program consumes a portion of the MySportsFeeds.com API, and
 converts it to a table of NHL athlete information. This table can,
