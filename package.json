@@ -1,11 +1,11 @@
 {
-  "name": "contour-sample",
+  "name": "redux-sample",
   "version": "1.0.0",
   "author": "Chris Calo",
   "private": true,
   "license": "© 2018 Chris Calo",
   "repository": "github:chris-calo/contour-sample",
-  "description": "Technical sample, requested by Nate Hunter",
+  "description": "Technical sample, requested by some dude",
   "scripts": {
     "build": "webpack --config config/webpack-production.js",
     "start": "webpack-dev-server --config config/webpack-development.js",
