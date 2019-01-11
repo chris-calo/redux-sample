@@ -1,0 +1,149 @@
+@import './colors';
+
+
+html, body, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, acronym, address, big, button, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+
+div, p, span, a {
+  margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 17px;
+	vertical-align: baseline;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+* {
+  -webkit-font-feature-settings: "liga" 0;
+  -webkit-font-variant-ligatures: no-common-ligatures;
+  font-feature-settings: "liga" 0;
+  text-rendering: optimizeSpeed;
+}
+
+html, body {
+  .no-scroll {
+    overflow: hidden;
+  }
+}
+
+html, body, #root {
+  width: 100%;
+  min-width: 1280px;
+
+  &.scroll-locked {
+    overflow: hidden;
+  }
+}
+
+#app {
+  width: 100%;
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+p, blockquote, li {
+  font-weight: 400;
+}
+
+a {
+  font-weight: 600;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+button {
+  background: transparent;
+  width: auto;
+  overflow: visible;
+  cursor: pointer;
+
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+
+  line-height: normal;
+
+  // font smoothing in webkit-based browsers
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+
+  // allows inputs to be clicked on mobile
+  -webkit-appearance: none;
+
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+}
+
+li {
+  list-style: none;
+}
+
+hr {
+  border: none;
+  outline: none;
+}
+
+form, input {
+  background: rgba(0, 0, 0, 0);
+  border: none;
+  outline: none;
+}
+
+input {
+  border-radius: 0;
+  -webkit-appearance: none;
+
+  &.filled {
+    color: $black !important;
+  }
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.table {
+  display: table !important;
+}
+
+.table-row {
+  display: table-row !important;
+}
+
+.table-cell {
+  display: table-cell !important;
+}
+
+.vertical-align {
+  vertical-align: middle !important;
+}
+
+.hide, .hidden {
+  display: none !important;
+}
